@@ -10,8 +10,22 @@
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
-    <Grid>
-        <TextBox Text="{Binding ActionText}" TextWrapping="Wrap" Margin="21,10,518.6,143" />
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding DisplayTextCommand}" Margin="333,143,0,0"/>
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <ListBox>
+            <ListBoxItem>List box #1</ListBoxItem>
+        </ListBox>
+        <ListBox ItemsSource="{Binding Users}" SelectedItem="{Binding CurrentUser}" Grid.Column="0" Grid.Row="0" Height="266">
+            <ListBox.ItemTemplate>
+                <DataTemplate  >
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding Name}"/>
+                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding Active}" IsEnabled="False"/>
+                        <Label Content="{Binding Age}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox Text="{Binding ActionText}" TextWrapping="Wrap"/>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding DisplayTextCommand}"/>
+    </StackPanel>
 </Window>

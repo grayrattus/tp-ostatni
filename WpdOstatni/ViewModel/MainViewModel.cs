@@ -18,6 +18,8 @@ namespace WpdOstatni.ViewModel
             FetchDataCommend = new RelayCommand(() => DataLayer = new DataLayer());
             DisplayTextCommand = new RelayCommand(ShowPopupWindow, () => !string.IsNullOrEmpty(m_ActionText));
             m_ActionText = "Text to be displayed on the popup";
+            DataLayer dl = new DataLayer();
+            m_Users = new ObservableCollection<User>(dl.User);
         }
         #endregion
 
