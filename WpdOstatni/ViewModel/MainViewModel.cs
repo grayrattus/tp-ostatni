@@ -15,14 +15,14 @@ namespace WpdOstatni.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            FetchDataCommend = new RelayCommand(() => DataLayer = new DataRepository());
+            FetchDataCommend = new RelayCommand(() => DataLayer = new IDataRepository());
             DisplayTextCommand = new RelayCommand(ShowPopupWindow, () => !string.IsNullOrEmpty(m_ActionText));
             RemoveUser = new RelayCommand(RemoveCurrentUser, () => !string.IsNullOrEmpty(m_ActionText));
             AddUser = new RelayCommand(AddNewUser, () => !string.IsNullOrEmpty(m_ActionText));
             // RemoveUser = new RelayCommand(RemoveCurrentUser);
             m_ActionText = "Text to be displayed on the popup";
-            DataRepository dl = new DataRepository();
-            m_Users = new ObservableCollection<User>(dl.User);
+            IDataRepository dl = new IDataRepository();
+            m_Users = new ObservableCollection<User>(dl.getUsers());
             UserToAdd = new User { Name = "", Age = 0, Active = false };
         }
         #endregion
@@ -110,7 +110,7 @@ namespace WpdOstatni.ViewModel
         /// </remarks>
         /// <value>The message box show delegate.</value>
         public Func<string, string, MessageBoxButton, MessageBoxImage, MessageBoxResult> MessageBoxShowDelegate { get; set; } = MessageBox.Show;
-        public DataRepository DataLayer
+        public IDataRepository DataLayer
         {
             get { return m_DataLayer; }
             set
@@ -121,7 +121,7 @@ namespace WpdOstatni.ViewModel
         #endregion
 
         #region Private stuff
-        private DataRepository m_DataLayer;
+        private IDataRepository m_DataLayer;
         private User m_CurrentUser;
         private User m_UserToAdd;
         private string m_ActionText;
