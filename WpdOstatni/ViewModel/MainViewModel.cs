@@ -52,6 +52,7 @@ namespace WpdOstatni.ViewModel
             {
                 m_CurrentUser = value;
                 RaisePropertyChanged();
+                DataLayer.updateUser(CurrentUser);
             }
         }
 
