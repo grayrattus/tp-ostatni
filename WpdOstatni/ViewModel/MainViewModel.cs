@@ -1,8 +1,8 @@
 ﻿
+using Repository;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
-using WpdOstatni.Model;
 using WpdOstatni.MVVMLight;
 
 namespace WpdOstatni.ViewModel
@@ -15,18 +15,23 @@ namespace WpdOstatni.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            FetchDataCommend = new RelayCommand(() => DataLayer = new IDataRepository());
+            FetchDataCommend = new RelayCommand(() => DataLayer = new DataRepository());
             DisplayTextCommand = new RelayCommand(ShowPopupWindow, () => !string.IsNullOrEmpty(m_ActionText));
             RemoveUser = new RelayCommand(RemoveCurrentUser, () => !string.IsNullOrEmpty(m_ActionText));
             AddUser = new RelayCommand(AddNewUser, () => !string.IsNullOrEmpty(m_ActionText));
+            UpdateUser = new RelayCommand(UpdateDataUser, () => !string.IsNullOrEmpty(m_ActionText));
             // RemoveUser = new RelayCommand(RemoveCurrentUser);
             m_ActionText = "Text to be displayed on the popup";
-            IDataRepository dl = new IDataRepository();
-            m_Users = new ObservableCollection<User>(dl.getUsers());
+            DataLayer = new DataRepository();
+            refreshUsers();
             UserToAdd = new User { Name = "", Age = 0, Active = false };
         }
         #endregion
 
+        private void refreshUsers()
+        {
+            Users = new ObservableCollection<User>(DataLayer.getUsers());
+        }
         #region ViewModel API
         public ObservableCollection<User> Users
         {
@@ -90,6 +95,12 @@ namespace WpdOstatni.ViewModel
             get;
             set;
         }
+
+        public RelayCommand UpdateUser
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Gets the commend responsible to fetch data.
         /// </summary>
@@ -115,7 +126,7 @@ namespace WpdOstatni.ViewModel
             get { return m_DataLayer; }
             set
             {
-                m_DataLayer = value; Users = new ObservableCollection<User>(value.User);
+                m_DataLayer = value; Users = new ObservableCollection<User>(value.getUsers());
             }
         }
         #endregion
@@ -134,14 +145,21 @@ namespace WpdOstatni.ViewModel
 
         private void RemoveCurrentUser()
         {
-            m_Users.Remove(CurrentUser);
+            DataLayer.removeUser(CurrentUser);
+            refreshUsers();
         }
 
         private void AddNewUser()
         {
-            m_Users.Add(new User { Name = UserToAdd.Name, Age = UserToAdd.Age, Active = UserToAdd.Active});
+            DataLayer.addUser(new User { Name = UserToAdd.Name, Age = UserToAdd.Age, Active = UserToAdd.Active });
+            refreshUsers();
         }
 
+        private void UpdateDataUser()
+        {
+            DataLayer.updateUser(CurrentUser);
+            refreshUsers();
+        }
 
         #endregion
 

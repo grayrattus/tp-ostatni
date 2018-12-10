@@ -5,7 +5,9 @@
 //  To be in touch join the community at GITTER: https://gitter.im/mpostol/TP
 //____________________________________________________________________________
 
-namespace WpdOstatni.Model
+using System;
+
+namespace Repository
 {
   /// <summary>
   /// Class User - a class representing user
@@ -13,7 +15,7 @@ namespace WpdOstatni.Model
   public class User
   {
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public bool Active { get; set; }

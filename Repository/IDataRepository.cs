@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WpdOstatni.Model;
+﻿using System.Collections.Generic;
 
 namespace Repository
 {
-    interface IDataRepository
+    public interface IDataRepository
     {
         bool addUser(User addUser);
         bool removeUser(User addUser);

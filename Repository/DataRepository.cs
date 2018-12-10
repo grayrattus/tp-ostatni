@@ -1,27 +1,28 @@
 ﻿
-using Repository;
+using System;
 using System.Collections.Generic;
 
-namespace WpdOstatni.Model
+namespace Repository
 {
-    public class IDataRepository : Repository.IDataRepository
+    public class DataRepository : IDataRepository
     {
         List<User> Users = new List<User>()
         {
-          new User() { Id = 1, Age = 21, Name = "Jan", Active = true },
-          new User() { Id = 2, Age = 22, Name = "Stefan", Active = false }
+          new User() { Id = Guid.NewGuid(), Age = 21, Name = "Jan", Active = true },
+          new User() { Id = Guid.NewGuid(), Age = 22, Name = "Stefan", Active = false }
         };
         
 
         public bool addUser(User user) 
         {
+            user.Id = Guid.NewGuid();
             Users.Add(user);
             return true;
         }
 
         public bool removeUser(User user)
         {
-            Users.Remove(user);
+            Users.RemoveAll(u => (u.Id == user.Id));
             return true;
         }
 
