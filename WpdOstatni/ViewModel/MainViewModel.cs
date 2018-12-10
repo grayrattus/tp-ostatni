@@ -15,10 +15,10 @@ namespace WpdOstatni.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            FetchDataCommend = new RelayCommand(() => DataLayer = new DataLayer());
+            FetchDataCommend = new RelayCommand(() => DataLayer = new DataRepository());
             DisplayTextCommand = new RelayCommand(ShowPopupWindow, () => !string.IsNullOrEmpty(m_ActionText));
             m_ActionText = "Text to be displayed on the popup";
-            DataLayer dl = new DataLayer();
+            DataRepository dl = new DataRepository();
             m_Users = new ObservableCollection<User>(dl.User);
         }
         #endregion
@@ -84,7 +84,7 @@ namespace WpdOstatni.ViewModel
         /// </remarks>
         /// <value>The message box show delegate.</value>
         public Func<string, string, MessageBoxButton, MessageBoxImage, MessageBoxResult> MessageBoxShowDelegate { get; set; } = MessageBox.Show;
-        public DataLayer DataLayer
+        public DataRepository DataLayer
         {
             get { return m_DataLayer; }
             set
@@ -95,7 +95,7 @@ namespace WpdOstatni.ViewModel
         #endregion
 
         #region Private stuff
-        private DataLayer m_DataLayer;
+        private DataRepository m_DataLayer;
         private User m_CurrentUser;
         private string m_ActionText;
         private ObservableCollection<User> m_Users;

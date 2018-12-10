@@ -55,8 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\DataLayerr.cs" />
-    <Compile Include="Model\User.cs" />
     <Compile Include="MVVMLight\RelayCommand.cs" />
     <Compile Include="MVVMLight\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -98,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{0cf74ac4-aca6-41d3-8533-8697ce6abe4e}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

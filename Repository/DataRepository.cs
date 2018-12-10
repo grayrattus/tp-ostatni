@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WpdOstatni.Model
 {
-  public class DataLayer
+  public class DataRepository
   {
     public IEnumerable<User> User
     {
