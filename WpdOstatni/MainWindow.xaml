@@ -19,12 +19,20 @@
                 <DataTemplate  >
                     <StackPanel Orientation="Vertical">
                         <Label Content="{Binding Name}"/>
-                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding Active}" IsEnabled="False"/>
                         <Label Content="{Binding Age}"/>
+                        <Button>Edit</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Name"/>
+            <TextBox Text="{Binding CurrentUser.Name}"/>
+            <Label Content="Age"/>
+            <TextBox Text="{Binding CurrentUser.Age}"/>
+            <Button Content="Edit user"></Button>
+        </StackPanel>
+        <TextBox Text="{Binding Curre}" TextWrapping="Wrap"/>
         <TextBox Text="{Binding ActionText}" TextWrapping="Wrap"/>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding DisplayTextCommand}"/>
     </StackPanel>

@@ -67,10 +67,6 @@ namespace WpdOstatni.ViewModel
         {
             get; private set;
         }
-        public RelayCommand ShowTreeViewMainWindowCommend
-        {
-            get; private set;
-        }
 
         #endregion
 
@@ -103,6 +99,8 @@ namespace WpdOstatni.ViewModel
         {
             MessageBoxShowDelegate(ActionText, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+       
         #endregion
 
 
