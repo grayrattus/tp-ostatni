@@ -17,6 +17,9 @@ namespace WpdOstatni.ViewModel
         {
             FetchDataCommend = new RelayCommand(() => DataLayer = new DataRepository());
             DisplayTextCommand = new RelayCommand(ShowPopupWindow, () => !string.IsNullOrEmpty(m_ActionText));
+            RemoveUser = new RelayCommand(RemoveCurrentUser, () => !string.IsNullOrEmpty(m_ActionText));
+            AddUser = new RelayCommand(AddNewUser, () => !string.IsNullOrEmpty(m_ActionText));
+            // RemoveUser = new RelayCommand(RemoveCurrentUser);
             m_ActionText = "Text to be displayed on the popup";
             DataRepository dl = new DataRepository();
             m_Users = new ObservableCollection<User>(dl.User);
@@ -60,6 +63,17 @@ namespace WpdOstatni.ViewModel
             get;
             private set;
         }
+
+        public RelayCommand RemoveUser
+        {
+            get;
+            set;
+        }
+        public RelayCommand AddUser
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Gets the commend responsible to fetch data.
         /// </summary>
@@ -95,9 +109,20 @@ namespace WpdOstatni.ViewModel
         private User m_CurrentUser;
         private string m_ActionText;
         private ObservableCollection<User> m_Users;
+
         private void ShowPopupWindow()
         {
-            MessageBoxShowDelegate(ActionText, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBoxShowDelegate("test", "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void RemoveCurrentUser()
+        {
+            m_Users.Remove(CurrentUser);
+        }
+
+        private void AddNewUser()
+        {
+
         }
 
        
