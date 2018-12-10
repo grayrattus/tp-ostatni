@@ -23,6 +23,7 @@ namespace WpdOstatni.ViewModel
             m_ActionText = "Text to be displayed on the popup";
             DataRepository dl = new DataRepository();
             m_Users = new ObservableCollection<User>(dl.User);
+            UserToAdd = new User { Name = "", Age = 0, Active = false };
         }
         #endregion
 
@@ -48,6 +49,21 @@ namespace WpdOstatni.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+
+        public User UserToAdd
+        {
+            get
+            {
+                return m_UserToAdd;
+            }
+            set
+            {
+                m_UserToAdd = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string ActionText
         {
             get { return m_ActionText; }
@@ -107,6 +123,7 @@ namespace WpdOstatni.ViewModel
         #region Private stuff
         private DataRepository m_DataLayer;
         private User m_CurrentUser;
+        private User m_UserToAdd;
         private string m_ActionText;
         private ObservableCollection<User> m_Users;
 
@@ -122,10 +139,10 @@ namespace WpdOstatni.ViewModel
 
         private void AddNewUser()
         {
-
+            m_Users.Add(new User { Name = UserToAdd.Name, Age = UserToAdd.Age, Active = UserToAdd.Active});
         }
 
-       
+
         #endregion
 
 

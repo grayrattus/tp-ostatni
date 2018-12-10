@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpdOstatni"
         xmlns:vm="clr-namespace:WpdOstatni.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -32,8 +32,13 @@
             <Button Content="Edit user"></Button>
         </StackPanel>
         <Button Command="{Binding RemoveUser}">Remove</Button>
-        <TextBox Text="{Binding Curre}" TextWrapping="Wrap"/>
-        <TextBox Text="{Binding ActionText}" TextWrapping="Wrap"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding DisplayTextCommand}"/>
+        <StackPanel Orientation="Vertical">
+            <Label Content="Create new user"/>
+            <Label Content="Name"/>
+            <TextBox Text="{Binding UserToAdd.Name}"/>
+            <Label Content="Age"/>
+            <TextBox Text="{Binding UserToAdd.Age}"/>
+        </StackPanel>
+        <Button Command="{Binding AddUser}">Add</Button>
     </StackPanel>
 </Window>
